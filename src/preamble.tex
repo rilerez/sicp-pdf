@@ -6,29 +6,37 @@
 %  It will be read in by texi-to-latex.pl.  %
 %===========================================%
 
-\documentclass[11pt,oneside]{book}
+\documentclass[11pt,oneside]{scrbook}
+% Handles microtypography, makes small changes to produce better output.
+% doesn't work well with XeTeX
+\usepackage{microtype}
+\usepackage{tocstyle}
+\addtokomafont{chapterentry}{\rmfamily\normalfont}
+\renewcommand{\contentsname}{contents}
+\newcommand{\mynote}{\footnote}
+\usetocstyle{nopagecolumn}
 
 % New line height: 1.05 * 1.2 = 1.26
-\renewcommand{\baselinestretch}{1.05}
+% \renewcommand{\baselinestretch}{1.05}
 
 % Font settings
 \usepackage[no-math]{fontspec} %-----------------------%  This exact order
-\defaultfontfeatures{%                                 %  of declarations
-  Scale=MatchLowercase, % needed here ...              %  is important for
-}                                                      %  single quotes not
-\setmonofont{Inconsolata LGC}                          %  to turn out curly
+% \defaultfontfeatures{%                                 %  of declarations
+%   Scale=MatchLowercase, % needed here ...              %  is important for
+% }                                                      %  single quotes not
+%
+\setmonofont{Inconsolata g}                          %  to turn out curly
                                                        %  ("typographic")
 \defaultfontfeatures{%                                 %  in verbatim blocks
   Scale=MatchLowercase, % ... and here again           %  of Scheme code.
-  Mapping=tex-text,                                    %  Now the quote is
-  SmallCapsFeatures={LetterSpace=2.5,WordSpace=1.05},  %  upright and safely
+  Numbers=OldStyle
 }                                                      %  copy-pasteable to
 \setmainfont{Linux Libertine O}                        %  the REPL without
 \setsansfont{Linux Biolinum O} %-----------------------%  giving errors.
 
-\usepackage{polyglossia}
-\setdefaultlanguage[variant=american]{english}
-\setotherlanguages{greek}
+% \usepackage{polyglossia}
+% \setdefaultlanguage[variant=american]{english}
+% \setotherlanguages{greek}
 
 % To be able to use '\-/' in place of '-' inside \code{}
 % so that long function names containing hyphens
@@ -60,7 +68,7 @@
 \usepackage{fancyvrb}
 \usepackage{imakeidx}
 \usepackage[totoc,font=footnotesize]{idxlayout}
-\usepackage{fancyhdr}
+%\usepackage{fancyhdr}
 \pagestyle{plain}
 \usepackage[final]{pdfpages} % inserts pages from a pdf file
 
@@ -72,7 +80,7 @@
             hcentering,       % if you get "Too many unprocessed floats" error
 ]{geometry}
 
-\usepackage{titlesec}  % to change the appearance of section titles
+%\usepackage{titlesec}  % to change the appearance of section titles
 \usepackage{listings}  % for syntax highlighted code listings
 \usepackage{verbatim}  % for simple verbatim and comment environments
 \usepackage{enumerate} % allows customized labels in enumerations
@@ -210,28 +218,28 @@
 {\lstset{basicstyle=\ttfamily\footnotesize\color{SchemeLight},#1}}
 {}
 
-\titleformat{\chapter}[display]
-  {\color{SchemeDark}\normalfont\sffamily\bfseries\LARGE}
-  {\filright \color{ChapterViolet}\sffamily\mdseries
-    \fontsize{6em}{0em}\selectfont
-    \oldstylenums{\thechapter}}
-  {1em}
-  {\filright}
+% \titleformat{\chapter}[display]
+%   {\color{SchemeDark}\normalfont\sffamily\LARGE}
+%   {\filright \color{ChapterViolet}\sffamily\mdseries
+%     \fontsize{6em}{0em}\selectfont
+%     \oldstylenums{\thechapter}}
+%   {1em}
+%   {\filright}
 
-\titleformat{\section}
-{\color{SchemeDark}\normalfont\Large\sffamily\bfseries}
-{\color{DropCapViolet}\thesection}{0.8em}{}
+% \titleformat{\section}
+% {\color{SchemeDark}\normalfont\Large\sffamily}
+% {\color{DropCapViolet}\thesection}{0.8em}{}
 
-\titleformat{\subsection}
-{\color{SchemeDark}\normalfont\large\sffamily\bfseries}
-{\color{DropCapViolet}\thesubsection}{0.8em}{}
+% \titleformat{\subsection}
+% {\color{SchemeDark}\normalfont\large\sffamily}
+% {\color{DropCapViolet}\thesubsection}{0.8em}{}
 
-\titleformat{\subsubsection}
-{\color{black}\normalfont\normalsize\sffamily\bfseries}
-{\color{DropCapViolet}\thesubsubsection}{0.8em}{}
+% \titleformat{\subsubsection}
+% {\color{black}\normalfont\normalsize\sffamily}
+% {\color{DropCapViolet}\thesubsubsection}{0.8em}{}
 
-\setcounter{secnumdepth}{3}
-\setcounter{tocdepth}{3}
+% \setcounter{secnumdepth}{3}
+% \setcounter{tocdepth}{3}
 
 \frenchspacing
 \makeindex
@@ -243,3 +251,4 @@
 \begin{document}
 
 \VerbatimFootnotes
+%\tableofcontents
